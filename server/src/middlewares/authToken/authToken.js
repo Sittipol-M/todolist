@@ -12,7 +12,7 @@ generateAuthToken = async (req, res, next) => {
       .header("authorization", authToken)
       .json({ user_id: foundUser.id, message: "The user login successfully." });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -26,9 +26,20 @@ checkAuthTokenAndPermissions = async (req, res, next) => {
     if (decoded.user_id !== req.params.user_id) {
       throw new ForbiddenError("The user does not have permission.", "permission", "authorizationToken");
     }
-    next();
+    return next();
   } catch (error) {
-    next(error);
+    try {
+      if (error.message === "jwt expired") {
+        throw new ForbiddenError(
+          "A token is expired for authorization need to login again.",
+          "expired",
+          "authorizationToken"
+        );
+      }
+    } catch (error) {
+      return next(error);
+    }
+    return next(error);
   }
 };
 
