@@ -1,24 +1,24 @@
-getAllTodolistByUserService = (userId) => {
-  console.log("getAllTodolistByUserService");
-};
-
-createNewTodolistByUserService = (userId) => {
+createNewTodolistByUserService = async (userId, todolistBody) => {
   console.log("createNewTodolistByUserService");
 };
 
-deleteAllTodolistByUserService = (userId) => {
+getAllTodolistByUserService = async (userId) => {
+  console.log("getAllTodolistByUserService");
+};
+
+deleteAllTodolistByUserService = async (userId) => {
   console.log("deleteAllTodolistByUserService");
 };
 
-getOneTodolistByUserService = (userId, todolistId) => {
+getOneTodolistByUserService = async (userId, todolistId) => {
   console.log("getOneTodolistByUserService");
 };
 
-editOneTodolistByUserService = (userId, todolistId) => {
+editOneTodolistByUserService = async (userId, todolistId, todolistBody) => {
   console.log("editOneTodolistByUserService");
 };
 
-deleteOneTodolistByUserService = (userId, todolistId) => {
+deleteOneTodolistByUserService = async (userId, todolistId) => {
   console.log("deleteOneTodolistByUserService");
 };
 

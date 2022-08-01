@@ -10,7 +10,7 @@ generateAuthToken = async (req, res, next) => {
     return res
       .status(httpStatusCodes.OK)
       .header("authorization", authToken)
-      .json({ message: "The user login successfully." });
+      .json({ user_id: foundUser.id, message: "The user login successfully." });
   } catch (error) {
     next(error);
   }

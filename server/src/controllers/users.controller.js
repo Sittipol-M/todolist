@@ -1,25 +1,28 @@
 const {
-  getAllUserInformationService,
   getOneUserInformationService,
   editOneUserInformationService,
 } = require("../services/users.services/users.services");
 
-getAllUserInformation = async (req, res) => {
-  console.log("getAllUserInformation");
-  getAllUserInformationService();
-  res.send("getAllUserInformation");
+const { httpStatusCodes } = require("../helpers/httpStatusCode/httpStatusCode");
+
+getOneUserInformation = async (req, res, next) => {
+  try {
+    const userInformation = await getOneUserInformationService(req.params.user_id);
+    res.status(httpStatusCodes.OK).json(userInformation);
+    next();
+  } catch (error) {
+    next(error);
+  }
 };
 
-getOneUserInformation = async (req, res) => {
-  console.log("getOneUserInformation");
-  getOneUserInformationService(req.user_id);
-  res.send("getOneUserInformation");
+editOneUserInformation = async (req, res, next) => {
+  try {
+    const editedUser = await editOneUserInformationService(req.params.user_id, req.body);
+    return res.status(httpStatusCodes.OK).json(editedUser);
+    next();
+  } catch (error) {
+    next(error);
+  }
 };
 
-editOneUserInformation = async (req, res) => {
-  console.log("editOneUserInformation");
-  editOneUserInformationService(req.user_id);
-  res.send("editOneUserInformation");
-};
-
-module.exports = { getAllUserInformation, getOneUserInformation, editOneUserInformation };
+module.exports = { getOneUserInformation, editOneUserInformation };
