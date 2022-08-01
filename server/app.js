@@ -17,6 +17,10 @@ app.use(apiRoute, userRoutes);
 const todolistRoutes = require("./src/routes/todolists.routes");
 app.use(apiRoute, todolistRoutes);
 
+//handle unknown error
+const { serverUnknownErrorHandler } = require("./src/middlewares/serverUnknowErrorHandle/serverUnknowErrorHandle");
+app.use(serverUnknownErrorHandler);
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
