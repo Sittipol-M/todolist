@@ -29,7 +29,7 @@ createNewTodolistByUser = async (req, res, next) => {
 deleteAllTodolistByUser = async (req, res, next) => {
   try {
     await deleteAllTodolistByUserService(req.params.user_id);
-    return res.status(httpStatusCodes.NO_CONTENT);
+    return res.status(httpStatusCodes.NO_CONTENT).send();
   } catch (error) {
     next(error);
   }
@@ -56,7 +56,7 @@ editOneTodolistByUser = async (req, res, next) => {
 deleteOneTodolistByUser = async (req, res, next) => {
   try {
     await deleteOneTodolistByUserService(req.params.user_id, req.params.todolist_id);
-    return res.status(httpStatusCodes.NO_CONTENT);
+    return res.status(httpStatusCodes.NO_CONTENT).send();
   } catch (error) {
     next(error);
   }

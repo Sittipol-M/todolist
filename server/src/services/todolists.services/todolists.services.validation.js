@@ -18,24 +18,20 @@ createNewTodolistByUserServiceValidation = async (todolistBody) => {
   }
 };
 
-editOneTodolistByUserService = async (editTodolistBody) => {
-  //   const editTodolistSchema = Joi.object({
-  //     user_id:
-  //     username: Joi.string().alphanum().min(3).max(30).required(),
-  //     password: Joi.string().min(6).max(50).required(),
-  //     fname: Joi.string()
-  //       .regex(/^[A-Za-z0-9]+$/)
-  //       .required(),
-  //     lname: Joi.string()
-  //       .regex(/^[A-Za-z0-9]+$/)
-  //       .required(),
-  //     email: Joi.string().email().required(),
-  //   });
-  //   try {
-  //     await editTodolistSchema.validateAsync(editTodolistBody);
-  //   } catch (error) {
-  //     throw new ValidationError(error.details[0].type, error.details[0].context.key);
-  //   }
+editOneTodolistByUserServiceValidation = async (editTodolistBody) => {
+  const editTodolistSchema = Joi.object({
+    title: Joi.string().min(3).max(50),
+    description: Joi.string().min(10).max(100),
+    date: Joi.date(),
+    isUrgent: Joi.boolean(),
+    isImportant: Joi.boolean(),
+  });
+
+  try {
+    await editTodolistSchema.validateAsync(editTodolistBody);
+  } catch (error) {
+    throw new ValidationError(error.details[0].type, error.details[0].context.key);
+  }
 };
 
-module.exports = { createNewTodolistByUserServiceValidation };
+module.exports = { createNewTodolistByUserServiceValidation, editOneTodolistByUserServiceValidation };
