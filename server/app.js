@@ -7,6 +7,9 @@ const bodyParser = require("body-parser");
 // parse application/json
 app.use(bodyParser.json());
 
+//user dotenv
+require("dotenv").config();
+
 //-----routes-----
 const apiRoute = "/api/v1/";
 app.get(apiRoute, (req, res) => {

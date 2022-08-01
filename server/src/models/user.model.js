@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const connection = mongoose.createConnection(process.env.MONGODB_URL);
-
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,

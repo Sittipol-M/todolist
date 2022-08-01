@@ -1,4 +1,5 @@
 const { loginService, registerService } = require("../services/authentications.services/authentications.services");
+const { httpStatusCodes } = require("../helpers/httpStatusCode/httpStatusCode");
 
 login = (req, res) => {
   console.log("login");
@@ -6,13 +7,12 @@ login = (req, res) => {
   res.send("login");
 };
 
-register = async (req, res) => {
-  console.log("reigister");
+register = async (req, res, next) => {
   try {
     await registerService(req.body);
+    return res.status(httpStatusCodes.CREATED).json({ message: "The user was registered successfully" });
   } catch (error) {
-    const responseError = error.responseError;
-    res.status(responseError.statusCode).json(responseError);
+    next(error);
   }
 };
 
