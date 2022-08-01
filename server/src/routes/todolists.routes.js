@@ -7,8 +7,8 @@ const { checkAuthTokenAndPermissions } = require("../middlewares/authToken/authT
 router
   .route("/users/:user_id/todolists")
   .post(checkAuthTokenAndPermissions, todolistsController.createNewTodolistByUser)
-  .get(checkAuthTokenAndPermissions, todolistsController.getOneTodolistByUser)
-  .delete(todolistsController.deleteAllTodolistByUser);
+  .get(checkAuthTokenAndPermissions, todolistsController.getAllTodolistByUser)
+  .delete(checkAuthTokenAndPermissions, todolistsController.deleteAllTodolistByUser);
 
 router
   .route("/users/:user_id/todolists/:todolist_id")

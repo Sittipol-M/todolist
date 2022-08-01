@@ -1,9 +1,16 @@
+const { createNewTodolistByUserServiceValidation } = require("./todolists.services.validation");
+const { Todolist } = require("../../models/todolist.model");
+
 createNewTodolistByUserService = async (userId, todolistBody) => {
-  console.log("createNewTodolistByUserService");
+  //add user_id to todolist body
+  todolistBody.user_id = userId;
+  await createNewTodolistByUserServiceValidation(todolistBody);
+  await new Todolist(todolistBody).save();
 };
 
 getAllTodolistByUserService = async (userId) => {
-  console.log("getAllTodolistByUserService");
+  const allTodolists = await Todolist.find({ user_id: userId });
+  return allTodolists;
 };
 
 deleteAllTodolistByUserService = async (userId) => {
@@ -14,7 +21,7 @@ getOneTodolistByUserService = async (userId, todolistId) => {
   console.log("getOneTodolistByUserService");
 };
 
-editOneTodolistByUserService = async (userId, todolistId, todolistBody) => {
+editOneTodolistByUserService = async (userId, todolistId, editTodolistBody) => {
   console.log("editOneTodolistByUserService");
 };
 

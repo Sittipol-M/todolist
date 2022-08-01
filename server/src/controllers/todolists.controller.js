@@ -6,41 +6,56 @@ const {
   editOneTodolistByUserService,
   deleteOneTodolistByUserService,
 } = require("../services/todolists.services/todolists.services");
+const { httpStatusCodes } = require("../helpers/httpStatusCode/httpStatusCode");
 
-getAllTodolistByUser = async (req, res) => {
-  console.log("getAllTodolistByUser");
-  getAllTodolistByUserService(req.params.user_id, req.body);
-  res.send("getAllTodolistByUser");
+getAllTodolistByUser = async (req, res, next) => {
+  try {
+    const allTodolists = await getAllTodolistByUserService(req.params.user_id);
+    return res.status(httpStatusCodes.CREATED).json(allTodolists);
+  } catch (error) {
+    next(error);
+  }
 };
 
-createNewTodolistByUser = async (req, res) => {
-  console.log("createNewTodolistByUser");
-  createNewTodolistByUserService(req.params.user_id);
-  res.send("createNewTodolistByUser");
+createNewTodolistByUser = async (req, res, next) => {
+  try {
+    await createNewTodolistByUserService(req.params.user_id, req.body);
+    return res.status(httpStatusCodes.CREATED).json({ message: "The todolist was created successfully." });
+  } catch (error) {
+    next(error);
+  }
 };
 
-deleteAllTodolistByUser = async (req, res) => {
-  console.log("deleteAllTodolistByUser");
-  deleteAllTodolistByUserService(req.params.user_id);
-  res.send("deleteAllTodolistByUser");
+deleteAllTodolistByUser = async (req, res, next) => {
+  try {
+    await deleteAllTodolistByUserService(req.params.user_id);
+  } catch (error) {
+    next(error);
+  }
 };
 
-getOneTodolistByUser = async (req, res) => {
-  console.log("getOneTodolistByUser");
-  getOneTodolistByUserService(req.params.user_id, req.params.todolist_id);
-  res.send("getOneTodolistByUser");
+getOneTodolistByUser = async (req, res, next) => {
+  try {
+    await getOneTodolistByUserService(req.params.user_id, req.params.todolist_id);
+  } catch (error) {
+    next(error);
+  }
 };
 
-editOneTodolistByUser = async (req, res) => {
-  editOneTodolistByUserService(req.params.user_id, req.params.todolist_id, req.body);
-  console.log("editOneTodolistByUser");
-  res.send("editOneTodolistByUserp");
+editOneTodolistByUser = async (req, res, next) => {
+  try {
+    await editOneTodolistByUserService(req.params.user_id, req.params.todolist_id, req.body);
+  } catch (error) {
+    next(error);
+  }
 };
 
-deleteOneTodolistByUser = async (req, res) => {
-  deleteOneTodolistByUserService(req.params.user_id, req.params.todolist_id);
-  console.log("deleteOneTodolistByUser");
-  res.send("deleteOneTodolistByUser");
+deleteOneTodolistByUser = async (req, res, next) => {
+  try {
+    await deleteOneTodolistByUserService(req.params.user_id, req.params.todolist_id);
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
