@@ -6,10 +6,14 @@ login = (req, res) => {
   res.send("login");
 };
 
-register = (req, res) => {
+register = async (req, res) => {
   console.log("reigister");
-  registerService(req.body);
-  res.send("register");
+  try {
+    await registerService(req.body);
+  } catch (error) {
+    const responseError = error.responseError;
+    res.status(responseError.statusCode).json(responseError);
+  }
 };
 
 module.exports = { login, register };

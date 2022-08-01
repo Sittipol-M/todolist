@@ -1,9 +1,11 @@
-loginService = (loginBody) => {
+const { loginValidation, registerValidation } = require("./authentications.services.validation");
+
+loginService = async (loginBody) => {
   console.log("loginService");
 };
 
-registerService = (registerBody) => {
-  console.log("registerService");
+registerService = async (registerBody) => {
+  await registerValidation(registerBody);
 };
 
 module.exports = { loginService, registerService };

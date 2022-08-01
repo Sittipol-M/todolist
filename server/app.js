@@ -2,6 +2,11 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 
+const bodyParser = require("body-parser");
+
+// parse application/json
+app.use(bodyParser.json());
+
 //-----routes-----
 const apiRoute = "/api/v1/";
 app.get(apiRoute, (req, res) => {
