@@ -13,6 +13,9 @@ app.use(apiRoute, authRoutes);
 //--> users.routes
 const userRoutes = require("./src/routes/users.routes");
 app.use(apiRoute, userRoutes);
+//--> todolists.routes
+const todolistRoutes = require("./src/routes/todolists.routes");
+app.use(apiRoute, todolistRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
