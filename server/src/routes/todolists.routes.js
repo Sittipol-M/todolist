@@ -10,7 +10,7 @@ router
   .delete(todolistsController.deleteAllTodolistByUser);
 
 router
-  .route("users/:user_id/todolists/:todolist_id")
+  .route("/users/:user_id/todolists/:todolist_id")
   .patch(todolistsController.editOneTodolistByUser)
   .get(todolistsController.getOneTodolistByUser)
   .delete(todolistsController.deleteOneTodolistByUser);
