@@ -1,4 +1,1 @@
-"# todolist" 
-"# todolist" 
-"# todolist" 
-"# todolist" 
+"npm run start-server -> to start server"
