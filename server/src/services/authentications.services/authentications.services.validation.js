@@ -2,7 +2,6 @@ const Joi = require("joi");
 const { ValidationError } = require("../../helpers/customError/ValidationError");
 
 registerValidation = async (registerBody) => {
-  //   console.log(registerBody);
   const registerSchema = Joi.object({
     username: Joi.string().alphanum().min(3).max(30).required(),
     password: Joi.string().min(6).max(50).required(),
@@ -22,6 +21,16 @@ registerValidation = async (registerBody) => {
   }
 };
 
-loginValidation = (loginBody) => {};
+loginValidation = async (loginBody) => {
+  const loginSchema = Joi.object({
+    username: Joi.string().alphanum().min(3).max(30).required(),
+    password: Joi.string().min(6).max(50).required(),
+  });
+  try {
+    await loginSchema.validateAsync(loginBody);
+  } catch (error) {
+    throw new ValidationError(error.details[0].type, error.details[0].context.key);
+  }
+};
 
 module.exports = { registerValidation, loginValidation };

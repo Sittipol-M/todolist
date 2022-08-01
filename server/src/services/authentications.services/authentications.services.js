@@ -1,6 +1,7 @@
 const { loginValidation, registerValidation } = require("./authentications.services.validation");
 const { User } = require("../../models/user.model");
 const { DuplicateError } = require("../../helpers/customError/DuplicateError");
+const { UnauthorizedError } = require("../../helpers/customError/UnauthorizedError");
 const bcrypt = require("bcrypt");
 
 const generateHashedPassword = async (password) => {
@@ -15,7 +16,18 @@ const checkHashPassword = async (password, hashedPassword) => {
 };
 
 loginService = async (loginBody) => {
-  console.log("loginService");
+  //validate data
+  await loginValidation(loginBody);
+
+  //check username and password
+  const foundUser = await User.findOne({ username: loginBody.username });
+  if (!foundUser) {
+    throw new UnauthorizedError("username");
+  }
+
+  if (!(await checkHashPassword(loginBody.password, foundUser.password))) {
+    throw new UnauthorizedError("password");
+  }
 };
 
 registerService = async (registerBody) => {

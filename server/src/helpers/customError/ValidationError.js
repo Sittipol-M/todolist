@@ -6,10 +6,7 @@ class ValidationError {
     this.responseError = {
       message: "Validation error in your request.",
       statusCode: httpStatusCodes.BAD_REQUEST,
-      error: {
-        field: field,
-        errType: errType,
-      },
+      error: { field: field, errType: errType },
     };
   }
 }
